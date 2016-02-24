@@ -46,12 +46,14 @@ namespace ADPClientDemo
 
                         // String str = connection.getADPData("https://iat-api.adp.com/hr/v2/workers?limit=5");
                         // Console.WriteLine("\r\nData: {0} ",str);
+
                     }
                 }
                 catch (Exception e)
                 {
                     Console.WriteLine(e.Message);
                 }
+                Console.Read();
             }
         }
     }

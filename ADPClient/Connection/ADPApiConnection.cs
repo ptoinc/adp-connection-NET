@@ -192,39 +192,55 @@ namespace ADPClient
         /// 
         /// </summary>
         /// <param name="Filename"></param>
+        /// <param name="SSLKeyPath"></param>
         /// <param name="Password"></param>
         /// <returns></returns>
         private X509Certificate2 LoadCertificateFile(string Filename, string SSLKeyPath, string Password = null)
         {
+            string certificatepath = Filename;
             X509Certificate2 x509 = null;
 
-            if (Filename.EndsWith(".pfx"))
+            if (!File.Exists(certificatepath))
             {
-                x509 = new X509Certificate2(Filename, Password);
-            }
-            else {
-                using (FileStream fs = File.OpenRead(Filename))
+                certificatepath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\" + Filename;
+                if (!File.Exists(certificatepath))
                 {
-                    byte[] data = new byte[fs.Length];
-                    fs.Read(data, 0, data.Length);
-                    if (data[0] != 0x30)
-                    {
-                        // maybe it's ASCII PEM base64 encoded ? 
-                        data = PEM("CERTIFICATE", data);
-                    }
-                    if (data != null)
-                        x509 = new X509Certificate2(data);
+                    throw new ADPConnectionException("ADP connection Exception: File not found", String.Format("Tried: \r\n\t{0}\r\n\t{1}",Filename, certificatepath) );
                 }
+            }
+
+            try {
+                if (certificatepath.EndsWith(".pfx"))
+                {
+                    x509 = new X509Certificate2(certificatepath, Password);
+                }
+                else {
+                    using (FileStream fs = File.OpenRead(certificatepath))
+                    {
+                        byte[] data = new byte[fs.Length];
+                        fs.Read(data, 0, data.Length);
+                        if (data[0] != 0x30)
+                        {
+                            // maybe it's ASCII PEM base64 encoded ? 
+                            data = PEM("CERTIFICATE", data);
+                        }
+                        if (data != null)
+                            x509 = new X509Certificate2(data);
+                    }
+                }
+            } catch (Exception e)
+            {
+                throw new ADPConnectionException("ADP connection Exception: Certificate processing error", e);
             }
             return x509;
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="url"></param>
         /// <param name="data"></param>
-        /// <param name="credentials"></param>
+        /// <param name="authentication"></param>
         /// <param name="contentType"></param>
         /// <returns></returns>
         protected string Post(string url, Dictionary<string, string> data, AuthenticationHeaderValue authentication = null, string contentType = "application/x-www-form-urlencoded")
