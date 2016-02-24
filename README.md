@@ -28,7 +28,7 @@ $ devenv.exe adp-connection-NET.sln /ReBuild
 $ devenv.exe /Run
 ```
 
-The make setup will also install the **requests** package along with a few other developer dependencies. If you run into errors you may need to open and run the solution in Visual Studio.
+The build instruction should install the dependent packages from NuGet else get the packages from NuGet in the packages folder. If you run into errors you may need to open and run the solution in Visual Studio.
 
 *Check out the configuration file*
 ```sh
@@ -90,13 +90,7 @@ namespace ADPClientDemo {
 
 ## API Documentation ##
 
-Documentation on the individual API calls provided by the library is automatically generated from the library code. To generate the documentation, please complete the following steps:
-
-```
-make docs
-```
-
-The generated documentation can be viewed by opening adp_connection/docs/_build/html/index.html in your browser.
+Documentation on the individual API calls provided by the library is automatically generated from the library code.
 
  
 ## Contributing ##
