@@ -25,6 +25,10 @@ using System.Web;
 
 namespace ADPClient
 {
+
+    /// <summary>
+    /// 
+    /// </summary>
     public class AuthorizationCodeConnection : ADPApiConnection
     {
 
@@ -36,6 +40,38 @@ namespace ADPClient
             : base((AuthorizationCodeConfiguration)_connectionConfiguration)
         {
 
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ADPProductURL"></param>
+        /// <returns></returns>
+        public override string getADPData(string ADPProductURL)
+        {
+            string serverResponse = null;
+            ADPAccessToken token = getAccessToken();
+            Dictionary<string, string> data = null;
+
+            if (isConnectedIndicator() && (token != null))
+            {
+                data = new Dictionary<string, string>();
+
+                data.Add("client_id", ((AuthorizationCodeConfiguration)connectionConfiguration).clientID);
+                data.Add("client_secret", ((AuthorizationCodeConfiguration)connectionConfiguration).clientSecret);
+                data.Add("grant_type", ((AuthorizationCodeConfiguration)connectionConfiguration).grantType);
+                data.Add("code", ((AuthorizationCodeConfiguration)connectionConfiguration).authorizationCode);
+                data.Add("redirect_uri", ((AuthorizationCodeConfiguration)connectionConfiguration).redirectURL);
+
+
+                // send the data to ADP server/s
+                // since we have a valid token
+                serverResponse = Post(ADPProductURL, data, new AuthenticationHeaderValue(token.TokenType, token.AccessToken), "application/json");
+            }
+            else {
+                throw new Exception("Connection Exception: connection not established.");
+            }
+            return serverResponse;
         }
 
         /// <summary>

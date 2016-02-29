@@ -18,9 +18,21 @@
 
 namespace ADPClient.Product
 {
+
+    /// <summary>
+    /// 
+    /// </summary>
     public enum APIProduct
     {
+
+        /// <summary>
+        /// 
+        /// </summary>
         Worker_Management,
+
+        /// <summary>
+        /// 
+        /// </summary>
         User_Info
     }
 }

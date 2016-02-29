@@ -23,6 +23,10 @@ using System.Runtime.Serialization.Json;
 
 namespace ADPClient
 {
+
+    /// <summary>
+    /// 
+    /// </summary>
     public class JSONUtil
     {
 

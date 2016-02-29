@@ -19,8 +19,16 @@
 
 namespace ADPClient
 {
+
+    /// <summary>
+    /// List of scope used in authorization authentication/connection process
+    /// </summary>
     public enum AuthorizationScope
     {
+
+        /// <summary>
+        /// Scope specifying OpenID authentication/authorization type
+        /// </summary>
         Open_ID
     }
 }

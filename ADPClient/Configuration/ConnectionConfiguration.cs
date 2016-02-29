@@ -20,6 +20,9 @@ using System.Runtime.Serialization;
 
 namespace ADPClient
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [DataContract]
     public abstract class ConnectionConfiguration
     {

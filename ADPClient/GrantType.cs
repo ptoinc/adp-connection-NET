@@ -19,10 +19,26 @@
 
 namespace ADPClient
 {
+
+    /// <summary>
+    /// 
+    /// </summary>
     public enum GrantType
     {
+
+        /// <summary>
+        /// 
+        /// </summary>
         ClientCredetial,
+
+        /// <summary>
+        /// 
+        /// </summary>
         AuthorizationCode,
+
+        /// <summary>
+        /// 
+        /// </summary>
         SAML
     }
 }

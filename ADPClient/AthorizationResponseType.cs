@@ -18,8 +18,16 @@
 
 namespace ADPClient
 {
+
+    /// <summary>
+    /// List of available Authorization responses from ADP API
+    /// </summary>
     public enum AthorizationResponseType
     {
+
+        /// <summary>
+        /// API Response type
+        /// </summary>
         Code
     }
 }

@@ -21,6 +21,9 @@ using System.Runtime.Serialization;
 
 namespace ADPClient
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [DataContract]
     public class ClientCredentialConfiguration : ConnectionConfiguration
     {

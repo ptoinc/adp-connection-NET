@@ -153,7 +153,7 @@ namespace ADPClient
         /// </summary>
         /// <param name="ADPProductURL"></param>
         /// <returns></returns>
-        public string getADPData(string ADPProductURL)
+        public virtual string getADPData(string ADPProductURL)
         {
             string serverResponse = null;
             ADPAccessToken token = getAccessToken();

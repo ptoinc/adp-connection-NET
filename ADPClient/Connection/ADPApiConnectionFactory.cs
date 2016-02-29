@@ -21,6 +21,10 @@ using ADPClient.Product;
 
 namespace ADPClient
 {
+
+    /// <summary>
+    /// 
+    /// </summary>
     public class ADPApiConnectionFactory
     {
 
