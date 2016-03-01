@@ -2,7 +2,7 @@
 using System.Web.Mvc;
 using ADPClient;
 
-namespace UserInfoDemo
+namespace ADPClientWebDemo
 {
     public class marketplaceController : Controller
     {
@@ -25,7 +25,7 @@ namespace UserInfoDemo
             // get new connection configuration
             // JSON config object placed in Web.config configuration or
             // set individual config object attributes
-            String clientconfig = UserInfoDemo.Properties.Settings.Default.AuthorizationCodeConfiguration;
+            String clientconfig = ADPClientWebDemo.Properties.Settings.Default.AuthorizationCodeConfiguration;
 
             if (String.IsNullOrEmpty(clientconfig))
             {
@@ -92,6 +92,42 @@ namespace UserInfoDemo
                 ViewBag.Message = e.Message;
             }
 
+            return View("Index");
+        }
+
+        public ActionResult getData()
+        {
+            // get connection from session
+            AuthorizationCodeConnection connection = HttpContext.Session["AuthorizationCodeConnection"] as AuthorizationCodeConnection;
+
+            if (connection == null || ((AuthorizationCodeConfiguration)connection.connectionConfiguration).authorizationCode == null)
+            {
+                //is the connection available in session or is the 
+                // cached connection expired then lets re-authorize
+                ViewBag.Message = "Not logged in or no connection available";
+            }
+            else {
+                try
+                {
+                    connection.connect();
+
+                    // connection was successfull 
+                    if (connection.isConnectedIndicator())
+                    {
+                        // so get the worker like we wanted
+                        ViewBag.Message = "Successfully connected to ADP API";
+
+                        // get data using Product URL
+                        var data = connection.getADPData("https://iat-api.adp.com/core/v1/userinfo");
+                        ViewBag.Message = data;
+                    }
+                }
+                catch (Exception e)
+                {
+                    ViewBag.isError = true;
+                    ViewBag.Message = e.Message;
+                }
+            }
             return View("Index");
         }
 

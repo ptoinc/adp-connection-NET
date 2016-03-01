@@ -71,7 +71,7 @@ namespace ADPClient
         {
             if (connectionConfiguration == null)
             {
-                throw new Exception("Configuration not provided.");
+                throw new ADPConnectionException("Configuration not provided.");
             }
 
             this.accessToken = this.getAccessToken();
@@ -118,12 +118,12 @@ namespace ADPClient
             {
                 if (String.IsNullOrEmpty(connectionConfiguration.grantType))
                 {
-                    throw new Exception("ADP Connection Exception: config option grantType cannot be null/empty");
+                    throw new ADPConnectionException("ADP Connection Exception: config option grantType cannot be null/empty");
                 }
 
                 if (String.IsNullOrEmpty(connectionConfiguration.tokenServerURL))
                 {
-                    throw new Exception("ADP Connection Exception: config option tokenServerURL cannot be null/empty");
+                    throw new ADPConnectionException("ADP Connection Exception: config option tokenServerURL cannot be null/empty");
                 }
                 
                 data = new Dictionary<string, string>();
@@ -133,7 +133,7 @@ namespace ADPClient
                 data.Add("grant_type", connectionConfiguration.grantType);
 
                 // send the data to ADP server/s
-                var result = Post(connectionConfiguration.tokenServerURL, data, credentials /* new AuthenticationHeaderValue("Basic", encodedCredentials) */);
+                var result = SendWebRequest(connectionConfiguration.tokenServerURL, data, credentials);
 
                 if (!String.IsNullOrEmpty(result))
                 {
@@ -161,10 +161,10 @@ namespace ADPClient
             {
                 // send the data to ADP server/s
                 // since we have a valid token
-                serverResponse = Post(ADPProductURL, data, new AuthenticationHeaderValue(token.TokenType, token.AccessToken),  "application/json");
+                serverResponse = SendWebRequest(ADPProductURL, data, new AuthenticationHeaderValue(token.TokenType, token.AccessToken),  "application/json", "GET");
             }
             else {
-                throw new Exception("Connection Exception: connection not established.");
+                throw new ADPConnectionException("Connection Exception: connection not established.");
             }
             return serverResponse;
         }
@@ -232,7 +232,7 @@ namespace ADPClient
             }
             return x509;
         }
-
+        
         /// <summary>
         /// 
         /// </summary>
@@ -240,11 +240,13 @@ namespace ADPClient
         /// <param name="data"></param>
         /// <param name="authentication"></param>
         /// <param name="contentType"></param>
+        /// <param name="method"></param>
         /// <returns></returns>
-        protected string Post(string url, Dictionary<string, string> data, AuthenticationHeaderValue authentication = null, string contentType = "application/x-www-form-urlencoded")
+        protected string SendWebRequest(string url, Dictionary<string, string> data, AuthenticationHeaderValue authentication = null, string contentType = "application/x-www-form-urlencoded", string method="POST")
         {
             string responseString = null;
             FormUrlEncodedContent content = null;
+            System.Net.Http.HttpResponseMessage response = null;
             string certpath = (HttpContext.Current == null) ? connectionConfiguration.sslCertPath : HttpContext.Current.Server.MapPath(connectionConfiguration.sslCertPath);
 
             var encodedCredentials = Convert.ToBase64String(Encoding.ASCII.GetBytes(String.Format("{0}:{1}", connectionConfiguration.clientID, connectionConfiguration.clientSecret)));
@@ -262,14 +264,21 @@ namespace ADPClient
                 {
                     client.DefaultRequestHeaders.Authorization = authentication;
                 }
+
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(contentType));
 
-                if (data != null)
+                if (method.ToUpper().Equals("POST"))
                 {
-                    content = new FormUrlEncodedContent(data);
-                }
+                    if (data != null)
+                    {
+                        content = new FormUrlEncodedContent(data);
+                    }
 
-                var response = client.PostAsync(url, content).Result;
+                    response = client.PostAsync(url, content).Result;
+                } else
+                {
+                    response = client.GetAsync(url).Result;
+                }
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -285,7 +294,7 @@ namespace ADPClient
             }
 
             return responseString;
-        }
+        }        
     }
 }
 

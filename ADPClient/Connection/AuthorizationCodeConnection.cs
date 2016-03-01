@@ -66,10 +66,10 @@ namespace ADPClient
 
                 // send the data to ADP server/s
                 // since we have a valid token
-                serverResponse = Post(ADPProductURL, data, new AuthenticationHeaderValue(token.TokenType, token.AccessToken), "application/json");
+                serverResponse = SendWebRequest(ADPProductURL, data, new AuthenticationHeaderValue(token.TokenType, token.AccessToken), "application/json", "GET");
             }
             else {
-                throw new Exception("Connection Exception: connection not established.");
+                throw new ADPConnectionException("Connection Exception: connection not established.");
             }
             return serverResponse;
         }
@@ -96,7 +96,7 @@ namespace ADPClient
                 data.Add("redirect_uri", conconfig.redirectURL);
 
                 var encodedCredentials = Convert.ToBase64String(Encoding.ASCII.GetBytes(String.Format("{0}:{1}", connectionConfiguration.clientID, connectionConfiguration.clientSecret)));
-                var result = Post(conconfig.tokenServerURL, data, credentials);
+                var result = SendWebRequest(conconfig.tokenServerURL, data, credentials);
 
                 if (!String.IsNullOrEmpty(result))
                 {

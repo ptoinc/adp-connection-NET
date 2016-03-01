@@ -2,7 +2,7 @@
 using System;
 using System.Web.Mvc;
 
-namespace UserInfoDemo.Controllers
+namespace ADPClientWebDemo.Controllers
 {
     public class callbackController : Controller
     {

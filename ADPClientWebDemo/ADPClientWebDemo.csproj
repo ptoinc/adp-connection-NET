@@ -13,8 +13,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>UserInfoDemo</RootNamespace>
-    <AssemblyName>UserInfoDemo</AssemblyName>
+    <RootNamespace>ADPClientWebDemo</RootNamespace>
+    <AssemblyName>ADPClientWebDemo</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -45,10 +45,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="adp-connection-NET, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ADP-library-connection-NET.1.0\lib\net45\adp-connection-NET.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -139,9 +135,9 @@
     <Folder Include="Views\callback\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\UserInfo\UserInfo.csproj">
-      <Project>{cb75348b-0e9c-449b-9f47-1e4b0d1036a6}</Project>
-      <Name>UserInfo</Name>
+    <ProjectReference Include="..\ADPClient\ADPClient.csproj">
+      <Project>{06ad62d7-6317-460e-802c-3cfe11d9c4de}</Project>
+      <Name>ADPClient</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
