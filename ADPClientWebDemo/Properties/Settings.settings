@@ -5,7 +5,7 @@
     <Setting Name="AuthorizationCodeConfiguration" Type="System.String" Scope="Application">
       <Value Profile="(Default)">
           {
-          "clientID": "ec762f06-7410-4f6d-aa82-969902c1836a",
+          "clientID": ".ec762f06-7410-4f6d-aa82-969902c1836a",
           "clientSecret": "6daf2cd7-4604-46c0-ab43-a645a6571d34",
           "sslCertPath": "~/Content/certs/apiclient_iat.pfx",
           "sslKeyPath": "~/Content/certs/apiclient_iat.key",

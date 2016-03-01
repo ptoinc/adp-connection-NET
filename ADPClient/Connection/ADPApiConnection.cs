@@ -17,8 +17,6 @@
 */
 using System;
 using System.IO;
-using System.Net;
-using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Web;
@@ -259,14 +257,10 @@ namespace ADPClient
             {
                 // iat needs to support Basic Authentication
                 // uncomment this when it does.
-                // client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", encodedCredentials);
-                // System.Net.Http.Headers.AuthenticationHeaderValue t = new AuthenticationHeaderValue("Basic", encodedCredentials);
-                // var g = t.GetType();
 
                 if (authentication != null)
                 {
                     client.DefaultRequestHeaders.Authorization = authentication;
-                    // client.DefaultRequestHeaders.Add("Authorization", authorization); //  "Bearer " + accessToken);
                 }
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(contentType));
 

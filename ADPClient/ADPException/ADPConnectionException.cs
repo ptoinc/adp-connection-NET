@@ -58,5 +58,3 @@ namespace ADPClient.ADPException
         { }
     }
 }
-
-//new JavaScriptSerializer().Serialize(obj);

@@ -16,7 +16,6 @@
 # governing permissions and limitations under the License.
 */
 using System;
-using ADPClient.Product;
 
 
 namespace ADPClient

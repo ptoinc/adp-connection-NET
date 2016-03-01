@@ -95,12 +95,6 @@ namespace ADPClient
                 data.Add("code", conconfig.authorizationCode);
                 data.Add("redirect_uri", conconfig.redirectURL);
 
-                // string credentials = String.Concat(conconfig.clientID, ":", conconfig.clientSecret);
-                // var usrpwd = Convert.ToBase64String(System.Text.ASCIIEncoding.ASCII.GetBytes(credentials));
-                // byte[] data = Encoding.ASCII.GetBytes(formData);
-
-                // credentials = new AuthenticationHeaderValue(token.TokenType, token.AccessToken);
-
                 var encodedCredentials = Convert.ToBase64String(Encoding.ASCII.GetBytes(String.Format("{0}:{1}", connectionConfiguration.clientID, connectionConfiguration.clientSecret)));
                 var result = Post(conconfig.tokenServerURL, data, credentials);
 
