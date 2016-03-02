@@ -23,9 +23,14 @@ $ git clone https://github.com/adplabs/adp-connection-NET.git
 followed by
 
 ```sh
+
 $ cd adp-connection-NET
-$ devenv.exe adp-connection-NET.sln /ReBuild
-$ devenv.exe /Run
+
+open the solution in VisualStudio
+    adp-userinfo-NET.sln
+    
+run the demo client project ADPClientWebDemo
+
 ```
 
 The build instruction should install the dependent packages from NuGet else get the packages from NuGet in the packages folder. If you run into errors you may need to open and run the solution in Visual Studio.
