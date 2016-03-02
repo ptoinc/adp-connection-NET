@@ -37,7 +37,9 @@ The build instruction should install the dependent packages from NuGet else get 
 
 *Check out the configuration file*
 ```sh
-type ADPClientDemo\bin\Debug\ADPClientDemo.exe.config
+
+$ type ADPClientDemo\bin\Debug\ADPClientDemo.exe.config
+
 ```
 *Run the sample app*
 ```sh
