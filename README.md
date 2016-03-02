@@ -95,9 +95,21 @@ namespace ADPClientDemo {
 }
 ```
 
+
 ## API Documentation ##
 
-Documentation on the individual API calls provided by the library is automatically generated from the library code.
+Documentation on the individual API calls provided by the library is automatically generated from the library code. 
+
+```
+Visual Studio build will generate the XML documentation
+```
+
+## Tests ##
+
+Nunit tests are available in Nunit test project found in the solution.
+
+
+Use Visual Studio code analysis feature to check the code coverage..
 
  
 ## Contributing ##
