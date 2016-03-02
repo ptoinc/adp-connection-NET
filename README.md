@@ -27,7 +27,7 @@ followed by
 $ cd adp-connection-NET
 
 open the solution in VisualStudio
-    adp-userinfo-NET.sln
+    adp-connection-NET.sln
     
 run the demo client project ADPClientWebDemo
 
