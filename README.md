@@ -2,11 +2,8 @@
 
 The ADP Client Connection Library is intended to simplify and aid the process of authenticating, authorizing and connecting to the ADP Marketplace API Gateway. The Library includes a sample application that can be run out-of-the-box to connect to the ADP Marketplace API **test** gateway.
 
-There are two ways of installing and using this library:
-
-  - Clone the repo from Github: This allows you to access the raw source code of the library as well as provides the ability to run the sample application and view the Library documentation
-  - Search & Add the library as a NuGet library package to your Visual Studio solution. This is the recommended method when you are ready to develop amazing Apps for the ADP Marketplace store.
-
+Clone the repo from Github: This allows you to access the raw source code of the library as well as provides the ability to run the sample application and view the Library documentation
+ 
 ### Version
 (Beta) 1.0.0
 
@@ -18,12 +15,6 @@ You can either use the links on Github or the command line git instructions belo
 
 ```sh
 $ git clone https://github.com/adplabs/adp-connection-NET.git
-```
-
-followed by
-
-```sh
-
 $ cd adp-connection-NET
 
 open the solution in VisualStudio
@@ -41,7 +32,7 @@ The build instruction should install the dependent packages from NuGet else get 
 $ type ADPClientDemo\bin\Debug\ADPClientDemo.exe.config
 
 ```
-*Run the sample app*
+*Run the sample app after building*
 ```sh
 $ cd adp-connection-NET
 $ ADPClientDemo\bin\Debug\ADPClientDemo.exe
