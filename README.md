@@ -20,7 +20,9 @@ $ cd adp-connection-NET
 open the solution in VisualStudio
     adp-connection-NET.sln
     
-run the demo client project ADPClientWebDemo
+run the demo client project ADPClientWebDemo to tryout Authorization Code authentication demo
+     and/or
+run the demo client project ADPClientDemo to tryout Client Credentials authentication code demo
 
 ```
 
