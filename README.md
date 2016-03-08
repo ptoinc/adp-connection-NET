@@ -28,19 +28,15 @@ run the demo client project ADPClientDemo to tryout Client Credentials authentic
 
 The build instruction should install the dependent packages from NuGet else get the packages from NuGet in the packages folder. If you run into errors you may need to open and run the solution in Visual Studio.
 
-*Check out the configuration file*
-```sh
+##### Alternative: 
+*Running the sample app*
 
-$ type ADPClientDemo\bin\Debug\ADPClientDemo.exe.config
+Load the solution in Visual Studio and Hit [Ctrl F5] (for Start without Debugging)
 
-```
-*Run the sample app after building*
-```sh
-$ cd adp-connection-NET
-$ ADPClientDemo\bin\Debug\ADPClientDemo.exe
-```
+You can run the sample app included using the Visual Studio environment or deploy it to your favourite ASP.NET web server and enjoy the ease of developing using the ADP Library.
 
-The results of the authentication Token received using the demo credentials is displayed.
+This starts an HTTP server on port 8889 (this port must be unused to run the sample application). You can point your browser to http://localhost:8889. The sample app allows you to connect to the ADP test API Gateway using the **client_credentials** and **authorization_code** grant types. For the **authorization_code** connection, you will be asked to provide an ADP username (MKPLDEMO) and password (marketplace1). The test using the Authorization Code link will prompt a login and upon a successful login present the basic information about the user logged-in.
+
 
 ***
 
