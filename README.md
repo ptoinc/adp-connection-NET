@@ -1,11 +1,11 @@
-# ADP Client Connection Library for c#/.NET (Beta)
+# ADP Client Connection Library for c#/.NET
 
 The ADP Client Connection Library is intended to simplify and aid the process of authenticating, authorizing and connecting to the ADP Marketplace API Gateway. The Library includes a sample application that can be run out-of-the-box to connect to the ADP Marketplace API **test** gateway.
 
 Clone the repo from Github: This allows you to access the raw source code of the library as well as provides the ability to run the sample application and view the Library documentation
  
 ### Version
-(Beta) 1.0.0
+1.0.0
 
 ### Installation
 
