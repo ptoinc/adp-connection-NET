@@ -265,6 +265,7 @@ namespace ADPClient
                     client.DefaultRequestHeaders.Authorization = authentication;
                 }
 
+                client.DefaultRequestHeaders.Add("User-Agent","adp-connection-net/1.0.1");
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(contentType));
 
                 if (method.ToUpper().Equals("POST"))
