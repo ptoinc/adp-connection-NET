@@ -1,5 +1,5 @@
 ﻿/*# This file is part of adp-api-library.
-# https://github.com/adp/adp-api-lib-net
+# https://github.com/adplabs/adp-connection-NET
 
 # Copyright © 2015-2016 ADP, LLC.
 
@@ -21,69 +21,69 @@ using System.Runtime.Serialization;
 
 namespace ADPClient
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    [DataContract]
-    public class ADPAccessToken
-    {
-        /// <summary>
-        ///
-        /// </summary>
-        /// 
-        int _expiresIn;
+	/// <summary>
+	/// 
+	/// </summary>
+	[DataContract]
+	public class ADPAccessToken
+	{
+		/// <summary>
+		///
+		/// </summary>
+		/// 
+		int _expiresIn;
 
-        /// <summary>
-        ///
-        /// </summary>
-        /// 
-        [DataMember(Name = "access_token")]
-        public string AccessToken { get; set; }
+		/// <summary>
+		///
+		/// </summary>
+		/// 
+		[DataMember(Name = "access_token")]
+		public string AccessToken { get; set; }
 
-        /// <summary>
-        ///
-        /// </summary>
-        /// 
-        [DataMember(Name = "token_type")]
-        public string TokenType { get; set; }
+		/// <summary>
+		///
+		/// </summary>
+		/// 
+		[DataMember(Name = "token_type")]
+		public string TokenType { get; set; }
 
-        /// <summary>
-        ///
-        /// </summary>
-        /// 
-        [DataMember(Name = "expires_in")]
-        public int ExpiresIn
-        {
-            get { return _expiresIn; }
-            set
-            {
-                _expiresIn = value;
-                this.ExpiresOn = DateTime.Now.AddSeconds(value);
-            }
-        }
+		/// <summary>
+		///
+		/// </summary>
+		/// 
+		[DataMember(Name = "expires_in")]
+		public int ExpiresIn
+		{
+			get { return _expiresIn; }
+			set
+			{
+				_expiresIn = value;
+				this.ExpiresOn = DateTime.Now.AddSeconds(value);
+			}
+		}
 
-        /// <summary>
-        ///
-        /// </summary>
-        /// 
-        [DataMember(Name = "scope")]
-        public string Scope { get; set; }
+		/// <summary>
+		///
+		/// </summary>
+		/// 
+		[DataMember(Name = "scope")]
+		public string Scope { get; set; }
 
-        /// <summary>
-        ///
-        /// </summary>
-        /// 
-        public DateTime? ExpiresOn { get; set; }
+		/// <summary>
+		///
+		/// </summary>
+		/// 
+		public DateTime? ExpiresOn { get; set; }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public bool IsValid()
-        {
-            if (ExpiresOn.HasValue && DateTime.Now.CompareTo(ExpiresOn) < 0)
-                return true;
-            return false;
-        }
-    }
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <returns></returns>
+		public bool IsValid()
+		{
+			if (ExpiresOn.HasValue && DateTime.Now.CompareTo(ExpiresOn) < 0)
+				return true;
+			return false;
+		}
+	}
 }
