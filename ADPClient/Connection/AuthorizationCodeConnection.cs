@@ -1,5 +1,5 @@
 ﻿/*# This file is part of adp-api-library.
-# https://github.com/adp/adp-api-lib-net
+# https://github.com/adplabs/adp-connection-NET
 
 # Copyright © 2015-2016 ADP, LLC.
 
