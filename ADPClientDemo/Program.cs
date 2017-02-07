@@ -25,7 +25,8 @@ namespace ADPClientDemo
             {
                 Console.WriteLine("Settings file or default options not available.");
             }
-            else {
+            else
+            {
                 ClientCredentialConfiguration connectionCfg = JSONUtil.Deserialize<ClientCredentialConfiguration>(clientconfig);
                 ClientCredentialConnection connection = (ClientCredentialConnection)ADPApiConnectionFactory.createConnection(connectionCfg);
 
@@ -43,6 +44,11 @@ namespace ADPClientDemo
                         Console.WriteLine("         ExpiresIn: {0} ", token.ExpiresIn);
                         Console.WriteLine("         Scope: {0} ", token.Scope);
                         Console.WriteLine("         ExpiresOn: {0} ", token.ExpiresOn);
+
+                        // var eventsUrl = "https://iat-api.adp.com/events/core/v1/consumer-application-subscription-credentials.read";
+                        // var eventsBody = "{\"events\": [{}]}";
+                        // var eventsResults = connection.postADPEvent(eventsUrl, eventsBody);
+                        // Console.WriteLine("\r\nEvents Data: {0} ", eventsResults);
 
                         // String str = connection.getADPData("https://iat-api.adp.com/hr/v2/workers?limit=5");
                         // Console.WriteLine("\r\nData: {0} ",str);

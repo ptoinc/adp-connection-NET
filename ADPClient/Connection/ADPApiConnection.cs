@@ -39,7 +39,7 @@ namespace ADPClient
         /// 
         /// </summary>
         public ConnectionConfiguration connectionConfiguration { get; set; }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -125,7 +125,7 @@ namespace ADPClient
                 {
                     throw new ADPConnectionException("ADP Connection Exception: config option tokenServerURL cannot be null/empty");
                 }
-                
+
                 data = new Dictionary<string, string>();
 
                 data.Add("client_id", connectionConfiguration.clientID);
@@ -161,9 +161,35 @@ namespace ADPClient
             {
                 // send the data to ADP server/s
                 // since we have a valid token
-                serverResponse = SendWebRequest(ADPProductURL, data, new AuthenticationHeaderValue(token.TokenType, token.AccessToken),  "application/json", "GET");
+                serverResponse = SendWebRequest(ADPProductURL, data, new AuthenticationHeaderValue(token.TokenType, token.AccessToken), "application/json", "GET");
             }
-            else {
+            else
+            {
+                throw new ADPConnectionException("Connection Exception: connection not established.");
+            }
+            return serverResponse;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ADPProductURL"></param>
+        /// <param name="body"></param>
+        /// <returns></returns>
+        public virtual string postADPEvent(string ADPProductURL, string body)
+        {
+            string serverResponse = null;
+            ADPAccessToken token = getAccessToken();
+            Dictionary<string, string> data = null;
+
+            if (isConnectedIndicator() && (token != null))
+            {
+                // send the data to ADP server/s
+                // since we have a valid token
+                serverResponse = SendWebRequest(ADPProductURL, data, new AuthenticationHeaderValue(token.TokenType, token.AccessToken), "application/json", "POST", body);
+            }
+            else
+            {
                 throw new ADPConnectionException("Connection Exception: connection not established.");
             }
             return serverResponse;
@@ -203,16 +229,18 @@ namespace ADPClient
                 certificatepath = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"\" + Filename;
                 if (!File.Exists(certificatepath))
                 {
-                    throw new ADPConnectionException("ADP connection Exception: File not found", String.Format("Tried: \r\n\t{0}\r\n\t{1}",Filename, certificatepath) );
+                    throw new ADPConnectionException("ADP connection Exception: File not found", String.Format("Tried: \r\n\t{0}\r\n\t{1}", Filename, certificatepath));
                 }
             }
 
-            try {
+            try
+            {
                 if (certificatepath.EndsWith(".pfx"))
                 {
                     x509 = new X509Certificate2(certificatepath, Password);
                 }
-                else {
+                else
+                {
                     using (FileStream fs = File.OpenRead(certificatepath))
                     {
                         byte[] data = new byte[fs.Length];
@@ -226,13 +254,14 @@ namespace ADPClient
                             x509 = new X509Certificate2(data);
                     }
                 }
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 throw new ADPConnectionException("ADP connection Exception: Certificate processing error", e);
             }
             return x509;
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -241,8 +270,9 @@ namespace ADPClient
         /// <param name="authentication"></param>
         /// <param name="contentType"></param>
         /// <param name="method"></param>
+        /// <param name="jsonBody"></param>
         /// <returns></returns>
-        protected string SendWebRequest(string url, Dictionary<string, string> data, AuthenticationHeaderValue authentication = null, string contentType = "application/x-www-form-urlencoded", string method="POST")
+        protected string SendWebRequest(string url, Dictionary<string, string> data, AuthenticationHeaderValue authentication = null, string contentType = "application/x-www-form-urlencoded", string method = "POST", string jsonBody = "")
         {
             string responseString = null;
             FormUrlEncodedContent content = null;
@@ -250,7 +280,7 @@ namespace ADPClient
             string certpath = (HttpContext.Current == null) ? connectionConfiguration.sslCertPath : HttpContext.Current.Server.MapPath(connectionConfiguration.sslCertPath);
 
             var encodedCredentials = Convert.ToBase64String(Encoding.ASCII.GetBytes(String.Format("{0}:{1}", connectionConfiguration.clientID, connectionConfiguration.clientSecret)));
-            
+
             WebRequestHandler handler = new WebRequestHandler();
             X509Certificate2 certificate = LoadCertificateFile(certpath, connectionConfiguration.sslKeyPath, connectionConfiguration.sslKeyPass);
             handler.ClientCertificates.Add(certificate);
@@ -265,18 +295,25 @@ namespace ADPClient
                     client.DefaultRequestHeaders.Authorization = authentication;
                 }
 
-                client.DefaultRequestHeaders.Add("User-Agent","adp-connection-net/1.0.1");
+                client.DefaultRequestHeaders.Add("User-Agent", "adp-connection-net/1.0.1");
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(contentType));
 
                 if (method.ToUpper().Equals("POST"))
                 {
-                    if (data != null)
+                    if (jsonBody != String.Empty)
+                    {
+                        var jsonContent = new StringContent(jsonBody, Encoding.UTF8, "application/json");
+                        response = client.PostAsync(url, jsonContent).Result;
+                    }
+                    else if (data != null)
                     {
                         content = new FormUrlEncodedContent(data);
+                        response = client.PostAsync(url, content).Result;
                     }
 
-                    response = client.PostAsync(url, content).Result;
-                } else
+
+                }
+                else
                 {
                     response = client.GetAsync(url).Result;
                 }
@@ -288,14 +325,15 @@ namespace ADPClient
 
                     // by calling .Result you are synchronously reading the result
                     responseString = responseContent.ReadAsStringAsync().Result;
-                } else
+                }
+                else
                 {
                     throw new ADPConnectionException(String.Format("Connection Exception: {0}: {1}", response.StatusCode, response.ReasonPhrase), new JavaScriptSerializer().Serialize(response));
                 }
             }
 
             return responseString;
-        }        
+        }
     }
 }
 
