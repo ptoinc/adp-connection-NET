@@ -176,7 +176,7 @@ namespace ADPClient
         /// <param name="ADPProductURL"></param>
         /// <param name="body"></param>
         /// <returns></returns>
-        public virtual string postADPEvents(string ADPProductURL, string body)
+        public virtual string postADPEvent(string ADPProductURL, string body)
         {
             string serverResponse = null;
             ADPAccessToken token = getAccessToken();
@@ -305,8 +305,7 @@ namespace ADPClient
                         var jsonContent = new StringContent(jsonBody, Encoding.UTF8, "application/json");
                         response = client.PostAsync(url, jsonContent).Result;
                     }
-
-                    if (data != null)
+                    else if (data != null)
                     {
                         content = new FormUrlEncodedContent(data);
                         response = client.PostAsync(url, content).Result;
