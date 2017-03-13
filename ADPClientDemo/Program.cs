@@ -19,7 +19,7 @@ namespace ADPClientDemo
             {
                 configFileName = args[0];
             }
-            StreamReader sr = new StreamReader("..\\..\\Content\\configs\\" + configFileName);
+            StreamReader sr = new StreamReader("..\\..\\Content\\config\\" + configFileName);
             string clientconfig = sr.ReadToEnd();
 
             //string clientconfig = ADPClientDemo.Properties.Settings.Default.ClientCredentialConfiguration;

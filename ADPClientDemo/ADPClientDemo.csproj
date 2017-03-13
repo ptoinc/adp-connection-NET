@@ -57,6 +57,8 @@
     <None Include="Content\certs\cert.pem" />
     <None Include="Content\certs\cert.pfx" />
     <None Include="Content\certs\SSL.p12" />
+    <None Include="Content\config\default.json" />
+    <None Include="Content\config\production.json" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
