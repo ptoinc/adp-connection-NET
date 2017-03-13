@@ -25,23 +25,7 @@ namespace ADPClientDemo.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"
-                  {
-                  ""clientID"":  ""88a73992-07f2-4714-ab4b-de782acd9c4d"",
-                  ""clientSecret"": ""a130adb7-aa51-49ac-9d02-0d4036b63541"",
-                  ""_sslCertPath"": ""..\\..\\Content\\certs\\apiclient_iat.pfx"",
-                  ""_sslKeyPath"": ""..\\..\\Content\\certs\\apiclient_iat.key"",
-                  ""sslCertPath"": ""..\\..\\Content\\certs\\cert.pem"",
-                  ""sslKeyPath"": ""..\\..\\Content\\certs\\cert.key"",
-                  ""sslKeyPass"": ""adpadp10"",
-                  ""tokenServerURL"": ""https://iat-api.adp.com/auth/oauth/v2/token"",
-                  ""disconnectURL"": ""https://iat-accounts.adp.com/auth/oauth/v2/logout"",
-                  ""apiRequestURL"": ""https://iat-api.adp.com"",
-                  ""responseType"": ""code"",
-                  ""defaultexpiration"": 3600,
-                  ""grantType"": ""client_credentials""
-                  }
-                ")]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"")]
         public string ClientCredentialConfiguration {
             get {
                 return ((string)(this["ClientCredentialConfiguration"]));

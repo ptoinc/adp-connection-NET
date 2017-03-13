@@ -161,7 +161,7 @@ namespace ADPClient
             {
                 // send the data to ADP server/s
                 // since we have a valid token
-                serverResponse = SendWebRequest(ADPProductURL, data, new AuthenticationHeaderValue(token.TokenType, token.AccessToken), "application/json", "GET");
+                serverResponse = SendWebRequest(connectionConfiguration.apiRequestURL + ADPProductURL, data, new AuthenticationHeaderValue(token.TokenType, token.AccessToken), "application/json", "GET");
             }
             else
             {
@@ -186,7 +186,7 @@ namespace ADPClient
             {
                 // send the data to ADP server/s
                 // since we have a valid token
-                serverResponse = SendWebRequest(ADPProductURL, data, new AuthenticationHeaderValue(token.TokenType, token.AccessToken), "application/json", "POST", body);
+                serverResponse = SendWebRequest(connectionConfiguration.apiRequestURL + ADPProductURL, data, new AuthenticationHeaderValue(token.TokenType, token.AccessToken), "application/json", "POST", body);
             }
             else
             {
@@ -328,7 +328,12 @@ namespace ADPClient
                 }
                 else
                 {
-                    throw new ADPConnectionException(String.Format("Connection Exception: {0}: {1}", response.StatusCode, response.ReasonPhrase), new JavaScriptSerializer().Serialize(response));
+                    // by calling .Result you are performing a synchronous call
+                    var responseContent = response.Content;
+
+                    // by calling .Result you are synchronously reading the result
+                    responseString = responseContent.ReadAsStringAsync().Result;
+                    throw new ADPConnectionException(String.Format("Connection Exception: {0}: {1}", response.StatusCode, responseString), new JavaScriptSerializer().Serialize(response));
                 }
             }
 
