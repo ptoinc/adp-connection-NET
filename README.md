@@ -5,7 +5,7 @@ The ADP Client Connection Library is intended to simplify and aid the process of
 Clone the repo from Github: This allows you to access the raw source code of the library as well as provides the ability to run the sample application and view the Library documentation
  
 ### Version
-1.0.1
+1.0.2
 
 ### Installation
 
