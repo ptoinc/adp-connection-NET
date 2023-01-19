@@ -19,11 +19,10 @@ using System;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
-using System.Web;
 using System.Net.Http;
 using System.Collections.Generic;
 using System.Net.Http.Headers;
-using System.Web.Script.Serialization;
+using ADPClient;
 using ADPClient.ADPException;
 
 namespace ADPClient
@@ -277,7 +276,7 @@ namespace ADPClient
             string responseString = null;
             FormUrlEncodedContent content = null;
             System.Net.Http.HttpResponseMessage response = null;
-            string certpath = (HttpContext.Current == null) ? connectionConfiguration.sslCertPath : HttpContext.Current.Server.MapPath(connectionConfiguration.sslCertPath);
+            string certpath = (HttpContextHelper.Current == null) ? connectionConfiguration.sslCertPath : HttpContextHelper.Current.Server.MapPath(connectionConfiguration.sslCertPath);
 
             var encodedCredentials = Convert.ToBase64String(Encoding.ASCII.GetBytes(String.Format("{0}:{1}", connectionConfiguration.clientID, connectionConfiguration.clientSecret)));
 

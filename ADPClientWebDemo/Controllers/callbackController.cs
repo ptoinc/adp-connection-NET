@@ -1,6 +1,6 @@
 ﻿using ADPClient;
+using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Web.Mvc;
 
 namespace ADPClientWebDemo.Controllers
 {
